@@ -1,0 +1,15 @@
+name: "mcpvitals"
+description: "Run an MCP server health check in CI"
+inputs:
+  target:
+    description: "stdio command or http url of the MCP server"
+    required: true
+  strict:
+    description: "fail the build on any error-level finding"
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        pipx run mcpvitals check "${{ inputs.target }}" ${{ inputs.strict == 'true' && '--strict' || '' }}
