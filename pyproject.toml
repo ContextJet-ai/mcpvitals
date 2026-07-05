@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcpvitals"
+version = "0.1.0"
+description = "Vital signs for your MCP servers: health score, token cost, tool-confusion, migration readiness."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+dependencies = ["mcp>=1.0"]
+
+[project.optional-dependencies]
+tokens = ["tiktoken>=0.7"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+mcpvitals = "mcpvitals.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcpvitals"]
+
+[tool.pytest.ini_options]
+markers = ["e2e: end-to-end tests that spawn a server"]
+pythonpath = ["src"]

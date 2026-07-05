@@ -1,0 +1,7 @@
+{
+  "name": "healthy-server", "version": "1.2.0", "protocol_version": "2025-06-18",
+  "tools": [
+    {"name": "search_docs", "description": "Search the documentation for a query string and return ranked passages.", "input_schema": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}},
+    {"name": "create_ticket", "description": "Create a support ticket with a title and body.", "input_schema": {"type": "object", "properties": {"title": {"type": "string"}, "body": {"type": "string"}}, "required": ["title", "body"]}}
+  ]
+}
