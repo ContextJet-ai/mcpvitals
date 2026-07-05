@@ -72,6 +72,22 @@ Gate your server on every push with the bundled GitHub Action:
     strict: "true"   # fail the build on any error-level finding
 ```
 
+## Track and monitor (not just a one-shot check)
+
+Pin a server's tools and get alerted when they change. This catches **rug-pulls**, where a server you already approved silently mutates a tool's schema or description after the fact:
+
+```bash
+mcpvitals watch "npx your-server"           # pins tools to mcp.lock
+mcpvitals watch "npx your-server" --check    # re-run in CI; fails if a pinned tool changed
+```
+
+Probe a running server for live health (uptime and latency):
+
+```bash
+mcpvitals monitor "https://your-server/mcp" --count 5
+# probe 1/5: up 210ms ... uptime 100.0%  avg 207ms
+```
+
 ## Why this exists
 
 The MCP ecosystem grew faster than the tooling around it. There are thousands of servers and no standard way to tell whether one is any good, safe, or cheap to run. `mcpvitals` gives authors a one-command checkup before they publish, and gives everyone else a way to vet a server before they trust it.
