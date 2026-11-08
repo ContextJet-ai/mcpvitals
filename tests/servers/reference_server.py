@@ -1,4 +1,7 @@
-from mcp.server.fastmcp import FastMCP
+try:  # mcp 2.x
+    from mcp.server.mcpserver import MCPServer as FastMCP
+except ImportError:  # mcp 1.x
+    from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("reference")
 

@@ -3,20 +3,28 @@ import shlex
 import anyio
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
-from mcp.client.streamable_http import streamablehttp_client
+try:  # mcp 2.x renamed the HTTP client and dropped the session-id getter
+    from mcp.client.streamable_http import streamable_http_client as _http_client
+except ImportError:  # mcp 1.x
+    from mcp.client.streamable_http import streamablehttp_client as _http_client
 from mcpvitals.models import ServerSnapshot, ToolSpec
+
+
+def _get(obj, snake: str, camel: str):
+    # mcp 2.x uses snake_case fields, 1.x uses camelCase
+    return getattr(obj, snake, None) if hasattr(obj, snake) else getattr(obj, camel, None)
 
 
 async def _collect(session: ClientSession) -> ServerSnapshot:
     init = await session.initialize()
     tools = (await session.list_tools()).tools
-    tool_specs = [ToolSpec(t.name, t.description or "", t.inputSchema or {}) for t in tools]
-    info = init.serverInfo
+    tool_specs = [ToolSpec(t.name, t.description or "", _get(t, "input_schema", "inputSchema") or {}) for t in tools]
+    info = _get(init, "server_info", "serverInfo")
     caps = init.capabilities.model_dump(exclude_none=True) if init.capabilities else {}
     return ServerSnapshot(
         name=getattr(info, "name", ""),
         version=getattr(info, "version", ""),
-        protocol_version=str(getattr(init, "protocolVersion", "")),
+        protocol_version=str(_get(init, "protocol_version", "protocolVersion") or ""),
         tools=tool_specs,
         raw={"capabilities": caps},
     )
@@ -24,8 +32,8 @@ async def _collect(session: ClientSession) -> ServerSnapshot:
 
 async def _run(target: str) -> ServerSnapshot:
     if target.startswith("http://") or target.startswith("https://"):
-        async with streamablehttp_client(target) as (read, write, _):
-            async with ClientSession(read, write) as session:
+        async with _http_client(target) as streams:
+            async with ClientSession(streams[0], streams[1]) as session:
                 return await _collect(session)
     parts = shlex.split(target)
     params = StdioServerParameters(command=parts[0], args=parts[1:])
