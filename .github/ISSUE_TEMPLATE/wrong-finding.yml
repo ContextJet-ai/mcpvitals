@@ -1,0 +1,19 @@
+name: A check got it wrong
+description: A finding fired on your server and it shouldn't have (or missed something)
+labels: ["false-positive"]
+body:
+  - type: input
+    id: code
+    attributes:
+      label: Finding code
+      description: e.g. MV040
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: mcpvitals output
+      description: Paste the line(s), or `mcpvitals check ... --json`
+      render: text
+    validations:
+      required: true
