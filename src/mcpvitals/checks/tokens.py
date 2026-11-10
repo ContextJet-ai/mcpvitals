@@ -1,15 +1,23 @@
+import functools
 import json
 import math
 from mcpvitals.checks import check
 from mcpvitals.models import Finding, Level
 
 
-def estimate_tokens(text: str) -> int:
+@functools.lru_cache(maxsize=1)
+def _encoder():
+    """Load the BPE once per process; None (len/4 fallback) if tiktoken or its data is unavailable."""
     try:
         import tiktoken
-        return len(tiktoken.get_encoding("cl100k_base").encode(text))
+        return tiktoken.get_encoding("cl100k_base")
     except Exception:
-        return max(1, math.ceil(len(text) / 4))
+        return None
+
+
+def estimate_tokens(text: str) -> int:
+    enc = _encoder()
+    return len(enc.encode(text)) if enc else max(1, math.ceil(len(text) / 4))
 
 
 def _tool_text(t):

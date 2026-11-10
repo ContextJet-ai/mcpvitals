@@ -38,7 +38,7 @@ class ServerSnapshot:
 
     @classmethod
     def from_dict(cls, d: dict) -> "ServerSnapshot":
-        tools = [ToolSpec(t["name"], t.get("description", ""), t.get("input_schema", {}))
+        tools = [ToolSpec(t["name"], t.get("description", ""), t.get("input_schema", t.get("inputSchema", {})))
                  for t in d.get("tools", [])]
         return cls(
             name=d.get("name", ""),

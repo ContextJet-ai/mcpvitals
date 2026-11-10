@@ -47,7 +47,7 @@ Most linters stop at basic conformance. `mcpvitals` runs those, plus four things
 | **Security hygiene** | secrets in tool metadata, over-broad tools (`run_sql`, `exec`), model-directed instructions in descriptions (the tool-poisoning surface) |
 | **Token cost** | how many tokens each tool burns in the context window, and the total cost to connect the server |
 | **Tool confusion** | pairs of tools an agent will mix up, predicted from name/description overlap *before* it happens in production |
-| **Migration readiness** | what breaks under the 2026-07-28 stateless spec: old protocol, deprecated caps, core `tasks` (now an extension), unstable `tools/list` order, missing `ttlMs`/`cacheScope`, draft-07 schema constructs |
+| **Migration readiness** | what breaks under the 2026-07-28 stateless spec: old protocol, deprecated caps, core `tasks` (now an extension), unstable `tools/list` order, missing `ttlMs`/`cacheScope`/`resultType`, no `server/discover` support, draft-07 schema constructs |
 
 Every check is a pure function scored deterministically. Run `mcpvitals check --json` for machine output.
 
@@ -84,8 +84,9 @@ Locally: `mcpvitals check "npx your-server" --fail-under 80 --sarif out.sarif`.
 Pin a server's tools and get alerted when they change. This catches **rug-pulls**, where a server you already approved silently mutates a tool's schema or description after the fact:
 
 ```bash
-mcpvitals watch "npx your-server"           # pins tools to mcp.lock
-mcpvitals watch "npx your-server" --check    # re-run in CI; fails if a pinned tool changed
+mcpvitals watch "npx your-server"           # first run pins tools to mcp.lock; later runs fail if anything changed
+mcpvitals watch "npx your-server" --check    # in CI: same, and also fails if there is no lock yet
+mcpvitals watch "npx your-server" --update   # you reviewed the change: accept it and re-pin
 ```
 
 Probe a running server for live health (uptime and latency):
