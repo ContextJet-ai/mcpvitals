@@ -1,5 +1,8 @@
 name: "mcpvitals"
-description: "Run an MCP server health check in CI"
+description: "Health-check an MCP server in CI: score, token cost, tool confusion, 2026-07-28 spec readiness"
+branding:
+  icon: "activity"
+  color: "blue"
 inputs:
   target:
     description: "stdio command or http url of the MCP server"
