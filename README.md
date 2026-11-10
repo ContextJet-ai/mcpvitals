@@ -12,7 +12,7 @@
 </div>
 
 > [!NOTE]
-> We ran mcpvitals on 31 popular MCP servers in November 2026 ([full results](docs/scan-2026-11/)). **21 of 31 still only speak the pre-2026-07-28 handshake**, 17 ship at least one tool that costs 500+ tokens to expose, and the heaviest costs ~19.8k tokens of context before you type anything. Registries show none of this, so a heavy or confusing server looks identical to a good one. `mcpvitals` is the checkup.
+> We ran mcpvitals on 30 popular MCP servers in November 2026 ([full results](docs/scan-2026-11/)). **20 of 30 still only speak the pre-2026-07-28 handshake**, 17 ship at least one tool that costs 500+ tokens to expose, and the heaviest costs ~19.8k tokens of context before you type anything. Registries show none of this, so a heavy or confusing server looks identical to a good one. `mcpvitals` is the checkup.
 
 ## 60-second start
 
@@ -57,7 +57,7 @@ The first run of an `npx`/`uvx` server includes its download, which can take a m
 
 ![What breaks most often](docs/scan-2026-11/problems.png)
 
-31 popular servers, each run in a throwaway Docker container with placeholder credentials. Per-server scores, token costs and raw JSON are in [docs/scan-2026-11](docs/scan-2026-11/), along with the scripts to rerun it.
+30 popular servers, each run in a throwaway Docker container with placeholder credentials. Per-server scores, token costs and raw JSON are in [docs/scan-2026-11](docs/scan-2026-11/), along with the scripts to rerun it.
 
 ## Add the health badge to your README
 

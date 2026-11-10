@@ -1,6 +1,6 @@
 # MCP server scan, November 2026
 
-42 popular MCP servers checked with `mcpvitals 0.3.0` on 2026-11-10; 31 started and answered `tools/list`.
+42 popular MCP servers checked with `mcpvitals 0.3.0` on 2026-11-10; 30 started and answered `tools/list`.
 Each ran in a throwaway Docker container with placeholder credentials, so no real accounts were touched. Rerun any row with `uvx mcpvitals check "<command>"`.
 Scores are heuristics: a low score is a list of things worth a look (context cost, confusable tools, spec drift), not a claim that a server is broken or unsafe.
 
@@ -16,7 +16,6 @@ Scores are heuristics: a low score is a list of things worth a look (context cos
 | git (reference) | 100 (A) | 14 | 1459 | 2026-07-28 | MV031 |
 | MarkItDown (Microsoft) | 100 (A) | 1 | 60 | 2026-07-28 | MV031 |
 | memory (reference) | 100 (A) | 9 | 1066 | 2025-11-25 | MV055x9, MV050, MV056, MV031 |
-| Atlassian (community) | 95 (A) | - | - | 2025-11-25 | MV050, MV051, MV056, MV031 |
 | DuckDuckGo | 95 (A) | 3 | 1020 | 2026-07-28 | MV030, MV031 |
 | Excel | 95 (A) | 6 | 1269 | 2025-03-26 | MV050, MV056, MV030, MV031 |
 | Postgres (archived ref) | 95 (A) | 1 | 24 | 2024-11-05 | MV050, MV056, MV010, MV031 |
@@ -44,17 +43,17 @@ Scores are heuristics: a low score is a list of things worth a look (context cos
 
 ## Most common findings
 
-- **protocol older than 2026-07-28** (MV050): 21 of 31 servers
-- **only the legacy initialize handshake** (MV056): 21 of 31 servers
-- **single tool costs 500+ tokens** (MV030): 17 of 31 servers
-- **params with no 'required' list** (MV010): 11 of 31 servers
-- **draft-07 schema syntax** (MV055): 8 of 31 servers
-- **confusable tool pair** (MV040): 8 of 31 servers
-- **deprecated logging capability** (MV051): 6 of 31 servers
-- **over-broad tool (exec/sql/shell)** (MV021): 2 of 31 servers
-- **core 'tasks' capability** (MV052): 1 of 31 servers
-- **model-directed text in description** (MV022): 1 of 31 servers
-- **untyped params** (MV011): 1 of 31 servers
+- **protocol older than 2026-07-28** (MV050): 20 of 30 servers
+- **only the legacy initialize handshake** (MV056): 20 of 30 servers
+- **single tool costs 500+ tokens** (MV030): 17 of 30 servers
+- **params with no 'required' list** (MV010): 11 of 30 servers
+- **draft-07 schema syntax** (MV055): 8 of 30 servers
+- **confusable tool pair** (MV040): 8 of 30 servers
+- **deprecated logging capability** (MV051): 5 of 30 servers
+- **over-broad tool (exec/sql/shell)** (MV021): 2 of 30 servers
+- **core 'tasks' capability** (MV052): 1 of 30 servers
+- **model-directed text in description** (MV022): 1 of 30 servers
+- **untyped params** (MV011): 1 of 30 servers
 
 ## Did not start in the sandbox
 
@@ -71,5 +70,6 @@ Usually because the server needs a real account or a browser at startup. Not a j
 - SQLite: exited before tools/list
 - Stripe: exited before tools/list
 - Supabase: exited before tools/list
+- Atlassian (community): started but listed no tools (needs real credentials)
 
 Median context cost to connect: ~1459 tokens; heaviest: ~19775 tokens.

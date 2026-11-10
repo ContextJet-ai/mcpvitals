@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 
 HERE = pathlib.Path(__file__).parent
 recs = [json.loads(p.read_text()) for p in sorted((HERE / "raw").glob("*.json"))]
-ok = [r for r in recs if r["ok"]]
+# a server that answers tools/list with zero tools usually needs real credentials first; don't rank it
+empty = [r for r in recs if r["ok"] and not re.search(r"\((?!0 tools)\d+ tools\)", " ".join(f["message"] for f in r["report"]["findings"]))]
+ok = [r for r in recs if r["ok"] and r not in empty]
 LABELS = {"MV001": "tool with no description", "MV002": "duplicate tool name", "MV010": "params with no 'required' list", "MV011": "untyped params",
           "MV020": "secret in tool metadata", "MV021": "over-broad tool (exec/sql/shell)", "MV022": "model-directed text in description",
           "MV030": "single tool costs 500+ tokens", "MV040": "confusable tool pair", "MV050": "protocol older than 2026-07-28",
@@ -55,7 +57,7 @@ ax.set_title("What breaks most often", loc="left", fontsize=12, fontweight="bold
 for s in ("top", "right"): ax.spines[s].set_visible(False)
 fig.tight_layout(); fig.savefig(HERE / "problems.png"); plt.close(fig)
 
-failed = [r for r in recs if not r["ok"]]
+failed = [r for r in recs if not r["ok"]] + [dict(r, err="listed no tools") for r in empty]
 lines = [f"# MCP server scan, November 2026", "",
          f"{len(recs)} popular MCP servers checked with `mcpvitals 0.3.0` on 2026-11-10; {n} started and answered `tools/list`.",
          "Each ran in a throwaway Docker container with placeholder credentials, so no real accounts were touched. Rerun any row with `uvx mcpvitals check \"<command>\"`.",
@@ -68,7 +70,7 @@ for x in rows:
 lines += ["", "## Most common findings", ""] + [f"- **{LABELS[c]}** ({c}): {k} of {n} servers" for c, k in servers_with.most_common() if c in LABELS]
 if failed:
     lines += ["", "## Did not start in the sandbox", "", "Usually because the server needs a real account or a browser at startup. Not a judgement on the server.", ""]
-    lines += [f'- {r["name"]}: {"timed out" if r["err"] == "timeout" else "exited before tools/list"}' for r in failed]
+    lines += [f'- {r["name"]}: {"timed out" if r["err"] == "timeout" else "started but listed no tools (needs real credentials)" if r["err"] == "listed no tools" else "exited before tools/list"}' for r in failed]
 toks = [x["tokens"] for x in rows if x["tokens"]]
 if toks:
     lines += ["", f"Median context cost to connect: ~{sorted(toks)[len(toks)//2]} tokens; heaviest: ~{max(toks)} tokens."]
