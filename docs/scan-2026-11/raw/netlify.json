@@ -1,0 +1,83 @@
+{
+ "name": "Netlify",
+ "cmd": "npx -y @netlify/mcp",
+ "ok": true,
+ "secs": 1.4,
+ "report": {
+  "score": 55,
+  "grade": "F",
+  "findings": [
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'netlify-project-services-updater' costs ~885 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "netlify-project-services-updater"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'netlify-observability-services-reader' costs ~2469 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "netlify-observability-services-reader"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~5358 tokens to connect (10 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-user-services-reader' and 'netlify-deploy-services-reader' are 0.88 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-user-services-reader"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-user-services-reader' and 'netlify-team-services-reader' are 0.85 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-user-services-reader"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-user-services-reader' and 'netlify-project-services-reader' are 0.85 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-user-services-reader"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-user-services-reader' and 'netlify-extension-services-reader' are 0.81 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-user-services-reader"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-deploy-services-reader' and 'netlify-team-services-reader' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-deploy-services-reader"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-deploy-services-reader' and 'netlify-project-services-reader' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-deploy-services-reader"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'netlify-deploy-services-updater' and 'netlify-extension-services-updater' are 0.83 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "netlify-deploy-services-updater"
+   }
+  ]
+ },
+ "err": null
+}

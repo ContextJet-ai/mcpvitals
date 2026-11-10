@@ -1,0 +1,48 @@
+{
+ "name": "sequential-thinking (reference)",
+ "cmd": "npx -y @modelcontextprotocol/server-sequential-thinking",
+ "ok": true,
+ "secs": 0.7,
+ "report": {
+  "score": 95,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "sequentialthinking"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'sequentialthinking' costs ~1003 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "sequentialthinking"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1003 tokens to connect (1 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

@@ -1,0 +1,48 @@
+{
+ "name": "Context7 (Upstash)",
+ "cmd": "npx -y @upstash/context7-mcp",
+ "ok": true,
+ "secs": 0.9,
+ "report": {
+  "score": 60,
+  "grade": "D",
+  "findings": [
+   {
+    "code": "MV022",
+    "level": "error",
+    "message": "tool 'resolve-library-id' description contains model-directed instructions (poisoning surface)",
+    "hint": "tool descriptions should describe, not instruct the model",
+    "tool": "resolve-library-id"
+   },
+   {
+    "code": "MV022",
+    "level": "error",
+    "message": "tool 'query-docs' description contains model-directed instructions (poisoning surface)",
+    "hint": "tool descriptions should describe, not instruct the model",
+    "tool": "query-docs"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'resolve-library-id' costs ~711 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "resolve-library-id"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'query-docs' costs ~507 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "query-docs"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1218 tokens to connect (2 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

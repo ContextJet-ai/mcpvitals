@@ -1,0 +1,580 @@
+{
+ "name": "Notion (official)",
+ "cmd": "npx -y @notionhq/notion-mcp-server",
+ "ok": true,
+ "secs": 0.9,
+ "report": {
+  "score": 0,
+  "grade": "F",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'API-get-users' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "API-get-users"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'API-post-search' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "API-post-search"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-get-user' costs ~673 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-get-user"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-get-users' costs ~749 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-get-users"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-get-self' costs ~665 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-get-self"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-post-search' costs ~1241 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-post-search"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-get-block-children' costs ~785 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-get-block-children"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-patch-block-children' costs ~799 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-patch-block-children"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-a-block' costs ~686 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-update-a-block' costs ~806 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-delete-a-block' costs ~685 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-delete-a-block"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-a-page' costs ~766 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-patch-page' costs ~1015 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-patch-page"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-post-page' costs ~927 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-post-page"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-a-page-property' costs ~795 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-a-page-property"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-a-comment' costs ~780 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-a-comment"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-create-a-comment' costs ~827 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-create-a-comment"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-query-data-source' costs ~866 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-query-data-source"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-a-data-source' costs ~693 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-a-data-source"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-update-a-data-source' costs ~807 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-update-a-data-source"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-create-a-data-source' costs ~767 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-create-a-data-source"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-list-data-source-templates' costs ~718 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-list-data-source-templates"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-a-database' costs ~689 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-a-database"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-move-page' costs ~710 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-move-page"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-retrieve-page-markdown' costs ~801 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-retrieve-page-markdown"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'API-update-page-markdown' costs ~1525 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "API-update-page-markdown"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~19775 tokens to connect (24 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-get-block-children' and 'API-patch-block-children' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-get-block-children"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-get-block-children' and 'API-retrieve-a-block' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-get-block-children"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-update-a-block' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-delete-a-block' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-retrieve-a-page' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-retrieve-a-page-property' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-retrieve-a-comment' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-create-a-comment' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-retrieve-a-data-source' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-retrieve-a-database' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-block' and 'API-move-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-block' and 'API-delete-a-block' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-block' and 'API-retrieve-a-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-block' and 'API-create-a-comment' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-block' and 'API-update-a-data-source' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-block' and 'API-retrieve-a-database' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-block' and 'API-move-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-delete-a-block' and 'API-retrieve-a-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-delete-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-delete-a-block' and 'API-create-a-comment' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-delete-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-delete-a-block' and 'API-retrieve-a-database' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-delete-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-delete-a-block' and 'API-move-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-delete-a-block"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-post-page' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-retrieve-a-page-property' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-retrieve-a-comment' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-create-a-comment' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-retrieve-a-data-source' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-retrieve-a-database' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page' and 'API-move-page' are 0.90 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-post-page' and 'API-create-a-comment' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-post-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-post-page' and 'API-create-a-data-source' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-post-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-post-page' and 'API-move-page' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-post-page"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page-property' and 'API-retrieve-a-database' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page-property"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-page-property' and 'API-move-page' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-page-property"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-comment' and 'API-create-a-comment' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-comment"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-comment' and 'API-retrieve-a-data-source' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-comment"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-comment' and 'API-retrieve-a-database' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-comment"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-create-a-comment' and 'API-create-a-data-source' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-create-a-comment"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-create-a-comment' and 'API-retrieve-a-database' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-create-a-comment"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-create-a-comment' and 'API-move-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-create-a-comment"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-query-data-source' and 'API-retrieve-a-data-source' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-query-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-query-data-source' and 'API-update-a-data-source' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-query-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-query-data-source' and 'API-create-a-data-source' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-query-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-query-data-source' and 'API-list-data-source-templates' are 0.84 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-query-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-data-source' and 'API-update-a-data-source' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-data-source' and 'API-create-a-data-source' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-data-source' and 'API-list-data-source-templates' are 0.84 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-data-source' and 'API-retrieve-a-database' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-data-source' and 'API-create-a-data-source' are 0.91 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-update-a-data-source' and 'API-list-data-source-templates' are 0.84 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-update-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-create-a-data-source' and 'API-list-data-source-templates' are 0.84 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-create-a-data-source"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-a-database' and 'API-move-page' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-a-database"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'API-retrieve-page-markdown' and 'API-update-page-markdown' are 0.88 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "API-retrieve-page-markdown"
+   }
+  ]
+ },
+ "err": null
+}

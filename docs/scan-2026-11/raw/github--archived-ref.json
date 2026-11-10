@@ -1,0 +1,265 @@
+{
+ "name": "GitHub (archived ref)",
+ "cmd": "npx -y @modelcontextprotocol/server-github",
+ "ok": true,
+ "secs": 0.7,
+ "report": {
+  "score": 65,
+  "grade": "D",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2024-11-05 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_or_update_file"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "search_repositories"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_repository"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_file_contents"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "push_files"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_issue"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_pull_request"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "fork_repository"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_branch"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "list_commits"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "list_issues"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "update_issue"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "add_issue_comment"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "search_code"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "search_issues"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "search_users"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_issue"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_pull_request"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "list_pull_requests"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_pull_request_review"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "merge_pull_request"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_pull_request_files"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_pull_request_status"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "update_pull_request_branch"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_pull_request_comments"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get_pull_request_reviews"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~3939 tokens to connect (26 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'search_repositories' and 'search_code' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "search_repositories"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'create_repository' and 'create_issue' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "create_repository"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'create_repository' and 'create_branch' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "create_repository"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'create_issue' and 'create_pull_request' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "create_issue"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'create_issue' and 'create_branch' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "create_issue"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'create_pull_request' and 'create_branch' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "create_pull_request"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'get_pull_request_comments' and 'get_pull_request_reviews' are 0.80 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "get_pull_request_comments"
+   }
+  ]
+ },
+ "err": null
+}

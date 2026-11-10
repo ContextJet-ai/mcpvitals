@@ -1,0 +1,27 @@
+{
+ "name": "DuckDuckGo",
+ "cmd": "uvx duckduckgo-mcp-server",
+ "ok": true,
+ "secs": 0.7,
+ "report": {
+  "score": 95,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'fetch_content' costs ~552 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "fetch_content"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1020 tokens to connect (3 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

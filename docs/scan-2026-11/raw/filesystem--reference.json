@@ -1,0 +1,55 @@
+{
+ "name": "filesystem (reference)",
+ "cmd": "npx -y @modelcontextprotocol/server-filesystem /tmp",
+ "ok": true,
+ "secs": 0.8,
+ "report": {
+  "score": 85,
+  "grade": "B",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV021",
+    "level": "warn",
+    "message": "tool 'read_file' grants broad, unconstrained capability",
+    "hint": "scope it down; broad tools amplify prompt-injection blast radius",
+    "tool": "read_file"
+   },
+   {
+    "code": "MV021",
+    "level": "warn",
+    "message": "tool 'write_file' grants broad, unconstrained capability",
+    "hint": "scope it down; broad tools amplify prompt-injection blast radius",
+    "tool": "write_file"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1927 tokens to connect (14 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'list_directory' and 'list_directory_with_sizes' are 0.94 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "list_directory"
+   }
+  ]
+ },
+ "err": null
+}

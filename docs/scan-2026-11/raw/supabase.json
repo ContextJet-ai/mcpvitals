@@ -1,0 +1,8 @@
+{
+ "name": "Supabase",
+ "cmd": "npx -y @supabase/mcp-server-supabase@latest",
+ "ok": false,
+ "secs": 1.5,
+ "report": null,
+ "err": " connect: {_leaf(e2)} (server/discover also failed: {discover_error})\"\nRuntimeError: could not connect: MCPError: Connection closed (server/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\nPlease provide a personal access token (PAT) with the --access-token flag or set the SUPABASE_ACCESS_TOKEN environment variable\n\n"
+}

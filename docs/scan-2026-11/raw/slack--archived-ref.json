@@ -1,0 +1,8 @@
+{
+ "name": "Slack (archived ref)",
+ "cmd": "npx -y @modelcontextprotocol/server-slack",
+ "ok": false,
+ "secs": 1.0,
+ "report": null,
+ "err": "ect.py\", line 157, in _run\n    raise RuntimeError(f\"could not connect: {_leaf(e2)} (server/discover also failed: {discover_error})\"\nRuntimeError: could not connect: MCPError: Connection closed (server/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\nPlease set SLACK_BOT_TOKEN and SLACK_TEAM_ID environment variables\n\n"
+}

@@ -1,0 +1,8 @@
+{
+ "name": "Sentry",
+ "cmd": "npx -y @sentry/mcp-server",
+ "ok": false,
+ "secs": 2.2,
+ "report": null,
+ "err": "line 157, in _run\n    raise RuntimeError(f\"could not connect: {_leaf(e2)} (server/discover also failed: {discover_error})\"\nRuntimeError: could not connect: MCPError: Connection closed (server/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\nError: Not authenticated. Run 'npx -y @sentry/mcp-server auth login' first.\n\n"
+}

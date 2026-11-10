@@ -1,0 +1,34 @@
+{
+ "name": "time (reference)",
+ "cmd": "uvx mcp-server-time",
+ "ok": true,
+ "secs": 0.6,
+ "report": {
+  "score": 90,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'get_current_time' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "get_current_time"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'get_time_ago' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "get_time_ago"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~508 tokens to connect (3 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}
