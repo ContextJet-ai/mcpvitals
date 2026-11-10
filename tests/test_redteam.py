@@ -123,3 +123,21 @@ def test_pagination_follows_cursor():
 
     first, tools = anyio.run(ix._list_all_tools, Sess())
     assert [t.name for t in tools] == ["a", "b", "c"]
+
+
+def test_silent_discover_flagged():
+    snap = _snap(handshake="initialize", discover_error="MCPError: Request 'server/discover' timed out")
+    assert "MV058" in {f.code for f in migration_readiness(snap, {})}
+    assert "MV058" not in {f.code for f in migration_readiness(_snap(handshake="initialize",
+                                                                       discover_error="MCPError: Method not found"), {})}
+
+
+def test_handshake_initialize_skips_discover(monkeypatch):
+    calls = []
+
+    async def fake(target, modern):
+        calls.append(modern)
+        return _snap(handshake="initialize")
+    monkeypatch.setattr(ix, "_connect_and_collect", fake)
+    anyio.run(ix._run, "srv", 5, "initialize")
+    assert calls == [False]

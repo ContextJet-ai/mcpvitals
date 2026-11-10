@@ -17,7 +17,7 @@ def _snapshot(args) -> ServerSnapshot:
     if args.snapshot:
         return ServerSnapshot.from_dict(json.loads(pathlib.Path(args.snapshot).read_text()))
     from mcpvitals.introspect import introspect
-    return introspect(args.target, timeout=args.timeout)
+    return introspect(args.target, timeout=args.timeout, handshake=args.handshake)
 
 
 def _cmd_check(args) -> int:
@@ -91,7 +91,9 @@ def main(argv=None) -> int:
         sp = sub.add_parser(name)
         sp.add_argument("target", nargs="?", help="stdio command or http(s) url")
         sp.add_argument("--snapshot", help="load a ServerSnapshot json instead of connecting")
-        sp.add_argument("--timeout", type=float, default=60.0, help="seconds to wait for the server (default 60)")
+        sp.add_argument("--handshake", choices=["auto", "initialize"], default="auto",
+                        help="auto tries server/discover first; initialize skips it for servers that hang on it")
+        sp.add_argument("--timeout", type=float, default=180.0, help="seconds to wait for the server, including a first-time npx/uvx download (default 180)")
         if name == "check":
             sp.add_argument("--json", action="store_true")
             sp.add_argument("--badge", metavar="FILE")

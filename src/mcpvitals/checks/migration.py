@@ -77,6 +77,10 @@ def migration_readiness(snapshot, config):
             f"tools/list result has no ttlMs, required (with cacheScope) since {STATELESS_SPEC}",
             hint="return ttlMs and cacheScope on every list/read result (CacheableResult)"))
     raw = snapshot.raw or {}
+    if "timed out" in (raw.get("discover_error") or ""):
+        out.append(Finding("MV058", Level.WARN,
+            "server never answered server/discover",
+            hint="JSON-RPC requires an error reply for unknown methods; without one, 2026-07-28 clients wait out a timeout before falling back"))
     if raw.get("handshake") == "initialize":
         out.append(Finding("MV056", Level.INFO,
             "server does not answer server/discover; only the legacy initialize handshake works",

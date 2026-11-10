@@ -33,6 +33,13 @@ def _leaf(e: BaseException) -> str:
     return "timed out" if isinstance(e, TimeoutError) else f"{type(e).__name__}: {e}"
 
 
+_SAME_CONNECTION_INIT_SECONDS = 30
+# The SDK gives server/discover 10 s, but on stdio that clock starts while npx/uvx may still be
+# downloading the server. Killing it mid-download leaves a broken cache, so the first request
+# gets long enough to cover a cold start.
+_DISCOVER_SECONDS = 60
+
+
 class DiscoverFailed(Exception):
     """server/discover itself was rejected; the only case where the legacy fallback makes sense."""
 
@@ -40,10 +47,28 @@ class DiscoverFailed(Exception):
 async def _handshake(session: ClientSession, modern: bool):
     """Do the 2026-07-28 server/discover probe, or the legacy initialize. Returns (which, result)."""
     if modern:
+        import mcp.client.session as sdk_session
+        saved = getattr(sdk_session, "DISCOVER_TIMEOUT_SECONDS", None)
+        if saved is not None:
+            sdk_session.DISCOVER_TIMEOUT_SECONDS = max(saved, _DISCOVER_SECONDS)
         try:
             return "discover", await session.discover()
         except Exception as e:
-            raise DiscoverFailed(_leaf(e)) from e
+            discover_error = _leaf(e)
+        finally:
+            if saved is not None:
+                sdk_session.DISCOVER_TIMEOUT_SECONDS = saved
+        # Same connection, no respawn: legacy servers ignore or reject server/discover but still take
+        # initialize, and a respawn would redo a slow cold start (an npx download can take a minute).
+        # Some older servers wedge after an unknown method, so bound this and respawn if it stalls;
+        # by then the first process has usually finished its download, so the respawn starts warm.
+        try:
+            with anyio.fail_after(_SAME_CONNECTION_INIT_SECONDS):
+                result = await session.initialize()
+        except Exception as e:
+            raise DiscoverFailed(f"{discover_error}; initialize on the same connection: {_leaf(e)}") from e
+        session._mcpvitals_discover_error = discover_error
+        return "initialize", result
     return "initialize", await session.initialize()
 
 
@@ -88,7 +113,9 @@ async def _collect(session: ClientSession, modern: bool) -> ServerSnapshot:
              "supported_versions": list(discover.supported_versions) if discover else [],
              "tools_order_2": order2,
              "list_cache": {k: dumped[k] for k in ("ttlMs", "cacheScope") if k in dumped},
-             "list_result_type": dumped.get("resultType")},
+             "list_result_type": dumped.get("resultType"),
+             **({"discover_error": session._mcpvitals_discover_error[:200]}
+                if getattr(session, "_mcpvitals_discover_error", None) else {})},
     )
 
 
@@ -111,12 +138,13 @@ async def _connect_and_collect(target: str, modern: bool) -> ServerSnapshot:
             raise
 
 
-async def _run(target: str, timeout: float) -> ServerSnapshot:
+async def _run(target: str, timeout: float, handshake: str = "auto") -> ServerSnapshot:
     async def attempt(modern: bool) -> ServerSnapshot:
         with anyio.fail_after(timeout):
             return await _connect_and_collect(target, modern)
 
-    modern = hasattr(ClientSession, "discover")  # mcp 1.x only speaks the legacy handshake
+    # mcp 1.x only speaks the legacy handshake; handshake="initialize" skips the discover probe
+    modern = hasattr(ClientSession, "discover") and handshake != "initialize"
     try:
         return await attempt(modern=modern)
     except Exception as e:
@@ -132,5 +160,5 @@ async def _run(target: str, timeout: float) -> ServerSnapshot:
     return legacy
 
 
-def introspect(target: str, timeout: float = 60.0) -> ServerSnapshot:
-    return anyio.run(_run, target, timeout)
+def introspect(target: str, timeout: float = 180.0, handshake: str = "auto") -> ServerSnapshot:
+    return anyio.run(_run, target, timeout, handshake)
