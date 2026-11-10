@@ -8,7 +8,13 @@ HERE = pathlib.Path(__file__).parent
 recs = [json.loads(p.read_text()) for p in sorted((HERE / "raw").glob("*.json"))]
 # a server that answers tools/list with zero tools usually needs real credentials first; don't rank it
 empty = [r for r in recs if r["ok"] and not re.search(r"\((?!0 tools)\d+ tools\)", " ".join(f["message"] for f in r["report"]["findings"]))]
-ok = [r for r in recs if r["ok"] and r not in empty]
+# Servers whose setup needs an account, API key, token, connection string or cluster ran here with
+# placeholders. Some list a different or smaller tool set when not authenticated, so ranking them
+# would grade something users never see. Only servers that run with no credentials are ranked.
+NEEDS_CREDENTIALS = {"Notion (official)", "Firecrawl", "Heroku", "Exa", "Tavily", "GitHub (archived ref)",
+                     "Hugging Face", "MongoDB", "Netlify", "Kubernetes", "Postgres (archived ref)"}
+gated = [r for r in recs if r["ok"] and r["name"] in NEEDS_CREDENTIALS]
+ok = [r for r in recs if r["ok"] and r not in empty and r not in gated]
 LABELS = {"MV001": "tool with no description", "MV002": "duplicate tool name", "MV010": "params with no 'required' list", "MV011": "untyped params",
           "MV020": "secret in tool metadata", "MV021": "over-broad tool (exec/sql/shell)", "MV022": "model-directed text in description",
           "MV030": "single tool costs 500+ tokens", "MV040": "confusable tool pair", "MV050": "protocol older than 2026-07-28",
@@ -68,6 +74,9 @@ for x in rows:
     tops = ", ".join(f"{c}x{k}" if k > 1 else c for c, k in x["codes"].most_common(4))
     lines.append(f'| {x["name"]} | {x["score"]} ({x["grade"]}) | {x["tools"] or "-"} | {x["tokens"] or "-"} | {x["proto"]} | {tops} |')
 lines += ["", "## Most common findings", ""] + [f"- **{LABELS[c]}** ({c}): {k} of {n} servers" for c, k in servers_with.most_common() if c in LABELS]
+lines += ["", "## Not ranked: needs credentials", "",
+          "These started with placeholder keys, but a server can expose a different tool list once you are signed in, so ranking them would not be fair. Run mcpvitals against your own authenticated setup to grade them.", ""]
+lines += [f'- {r["name"]}' for r in sorted(gated, key=lambda r: r["name"])]
 if failed:
     lines += ["", "## Did not start in the sandbox", "", "Usually because the server needs a real account or a browser at startup. Not a judgement on the server.", ""]
     lines += [f'- {r["name"]}: {"timed out" if r["err"] == "timeout" else "started but listed no tools (needs real credentials)" if r["err"] == "listed no tools" else "exited before tools/list"}' for r in failed]
