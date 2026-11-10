@@ -7,9 +7,18 @@ inputs:
   strict:
     description: "fail the build on any error-level finding"
     default: "false"
+  fail-under:
+    description: "fail the build if the score is below this number (0-100)"
+    default: ""
+  sarif:
+    description: "path to write a SARIF file for GitHub code scanning"
+    default: ""
 runs:
   using: "composite"
   steps:
     - shell: bash
       run: |
-        pipx run mcpvitals check "${{ inputs.target }}" ${{ inputs.strict == 'true' && '--strict' || '' }}
+        pipx run mcpvitals check "${{ inputs.target }}" \
+          ${{ inputs.strict == 'true' && '--strict' || '' }} \
+          ${{ inputs.fail-under != '' && format('--fail-under {0}', inputs.fail-under) || '' }} \
+          ${{ inputs.sarif != '' && format('--sarif {0}', inputs.sarif) || '' }}

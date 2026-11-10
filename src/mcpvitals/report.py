@@ -26,3 +26,24 @@ def render_json(report: Report) -> str:
             for f in report.findings
         ],
     }, indent=2)
+
+
+_SARIF_LEVEL = {Level.ERROR: "error", Level.WARN: "warning", Level.INFO: "note"}
+
+
+def render_sarif(report: Report, target: str = "mcp-server") -> str:
+    """SARIF 2.1.0, so GitHub code scanning can show findings on the PR."""
+    results = [{
+        "ruleId": f.code,
+        "level": _SARIF_LEVEL[f.level],
+        "message": {"text": f.message + (f" ({f.hint})" if f.hint else "")},
+        "locations": [{"logicalLocations": [{"name": f.tool or target, "kind": "function" if f.tool else "module"}]}],
+    } for f in report.findings]
+    rules = [{"id": c} for c in sorted({f.code for f in report.findings})]
+    return json.dumps({
+        "version": "2.1.0",
+        "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+        "runs": [{"tool": {"driver": {"name": "mcpvitals", "informationUri": "https://github.com/ContextJet-ai/mcpvitals",
+                                      "rules": rules}},
+                  "results": results}],
+    }, indent=2)
