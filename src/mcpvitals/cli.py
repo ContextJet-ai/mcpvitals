@@ -17,7 +17,7 @@ def _snapshot(args) -> ServerSnapshot:
     if args.snapshot:
         return ServerSnapshot.from_dict(json.loads(pathlib.Path(args.snapshot).read_text()))
     from mcpvitals.introspect import introspect
-    return introspect(args.target)
+    return introspect(args.target, timeout=args.timeout, handshake=args.handshake)
 
 
 def _cmd_check(args) -> int:
@@ -48,17 +48,24 @@ def _cmd_watch(args) -> int:
     snap = _snapshot(args)
     new_lock = lock_from_snapshot(snap)
     lockpath = pathlib.Path(args.lock)
-    findings = []
-    if lockpath.exists():
-        findings = diff_locks(json.loads(lockpath.read_text()), new_lock)
-        print(render_human(score(findings)) if findings else "no changes since last pin")
-    else:
-        print(f"pinned {len(new_lock['tools'])} tools to {lockpath}")
-    if not args.check:
+    if not lockpath.exists():
+        if args.check:
+            print(f"no lock at {lockpath}; run `mcpvitals watch` once to pin the server", file=sys.stderr)
+            return 2
         lockpath.write_text(json.dumps(new_lock, indent=2, sort_keys=True))
-    if args.check and any(f.level == Level.ERROR for f in findings):
-        return 1
-    return 0
+        print(f"pinned {len(new_lock['tools'])} tools to {lockpath}")
+        return 0
+    findings = diff_locks(json.loads(lockpath.read_text()), new_lock)
+    if not findings:
+        print("no changes since last pin")
+        return 0
+    print(render_human(score(findings)))
+    if args.update:  # only an explicit --update accepts the change; a mutated tool must not silently re-pin
+        lockpath.write_text(json.dumps(new_lock, indent=2, sort_keys=True))
+        print(f"re-pinned {len(new_lock['tools'])} tools to {lockpath}")
+        return 0
+    print("lock left unchanged; review, then run with --update to accept", file=sys.stderr)
+    return 1
 
 
 def _cmd_monitor(args) -> int:
@@ -84,6 +91,9 @@ def main(argv=None) -> int:
         sp = sub.add_parser(name)
         sp.add_argument("target", nargs="?", help="stdio command or http(s) url")
         sp.add_argument("--snapshot", help="load a ServerSnapshot json instead of connecting")
+        sp.add_argument("--handshake", choices=["auto", "initialize"], default="auto",
+                        help="auto tries server/discover first; initialize skips it for servers that hang on it")
+        sp.add_argument("--timeout", type=float, default=180.0, help="seconds to wait for the server, including a first-time npx/uvx download (default 180)")
         if name == "check":
             sp.add_argument("--json", action="store_true")
             sp.add_argument("--badge", metavar="FILE")
@@ -92,7 +102,8 @@ def main(argv=None) -> int:
             sp.add_argument("--fail-under", type=int, metavar="N", help="exit 1 if the score is below N")
         if name == "watch":
             sp.add_argument("--lock", default="mcp.lock", help="lock file path (default: mcp.lock)")
-            sp.add_argument("--check", action="store_true", help="do not update the lock; fail on a changed tool")
+            sp.add_argument("--check", action="store_true", help="fail if no lock exists yet (for CI)")
+            sp.add_argument("--update", action="store_true", help="accept the changes and re-pin the lock")
         if name == "monitor":
             sp.add_argument("--count", type=int, default=3)
             sp.add_argument("--interval", type=float, default=2.0)

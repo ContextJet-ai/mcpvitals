@@ -13,3 +13,9 @@ def test_introspect_reference_server():
     assert "search_docs" in names
     assert snap.tools[0].description
     assert snap.protocol_version
+    import mcp.client.session as s
+    if hasattr(s.ClientSession, "discover"):  # mcp 2.x speaks 2026-07-28 end to end
+        assert snap.raw["handshake"] == "discover"
+        assert snap.raw["list_result_type"] and "ttlMs" in snap.raw["list_cache"]
+    else:
+        assert snap.raw["handshake"] == "initialize"

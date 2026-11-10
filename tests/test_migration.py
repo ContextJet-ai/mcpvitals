@@ -10,7 +10,7 @@ def test_old_protocol_flagged(messy):
 def test_deprecated_capability_flagged():
     snap = ServerSnapshot.from_dict({
         "name": "x", "version": "1", "protocol_version": "2025-06-18",
-        "raw": {"capabilities": {"sampling": {}}},
+        "raw": {"capabilities": {"logging": {}}},
     })
     assert any(f.code == "MV051" for f in migration_readiness(snap, {}))
 
@@ -53,3 +53,15 @@ def test_draft7_schema_flagged():
                                              "properties": {"t": {"items": [{"type": "string"}]}}}}]
     found = [f for f in migration_readiness(_snap(tools=tools), {}) if f.code == "MV055"]
     assert found and "definitions" in found[0].message and "items (array form)" in found[0].message
+
+
+def test_legacy_handshake_flagged():
+    assert "MV056" in _codes(_snap(handshake="initialize"))
+    assert "MV056" not in _codes(_snap(handshake="discover", pv="2026-07-28", list_cache={"ttlMs": 0},
+                                       list_result_type="complete"))
+
+
+def test_missing_result_type_flagged():
+    assert "MV057" in _codes(_snap(handshake="discover", pv="2026-07-28", list_cache={"ttlMs": 0}))
+    assert "MV057" not in _codes(_snap(handshake="discover", pv="2026-07-28", list_cache={"ttlMs": 0},
+                                       list_result_type="complete"))
