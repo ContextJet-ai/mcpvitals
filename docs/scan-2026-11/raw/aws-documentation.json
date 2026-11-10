@@ -1,0 +1,55 @@
+{
+ "name": "AWS Documentation",
+ "cmd": "uvx awslabs.aws-documentation-mcp-server@latest",
+ "ok": true,
+ "secs": 1.4,
+ "report": {
+  "score": 75,
+  "grade": "C",
+  "findings": [
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'read_documentation' costs ~643 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "read_documentation"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'read_sections' costs ~810 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "read_sections"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'search_table' costs ~963 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "search_table"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'search_documentation' costs ~1087 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "search_documentation"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'recommend' costs ~502 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "recommend"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~4005 tokens to connect (5 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

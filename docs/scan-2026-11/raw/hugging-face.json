@@ -1,0 +1,62 @@
+{
+ "name": "Hugging Face",
+ "cmd": "npx -y @llmindset/hf-mcp-server",
+ "ok": true,
+ "secs": 2.4,
+ "report": {
+  "score": 80,
+  "grade": "B",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'hub_repo_search' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "hub_repo_search"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'gr1_z_image_turbo_generate' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "gr1_z_image_turbo_generate"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'hf_fs' costs ~1145 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "hf_fs"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'gr1_z_image_turbo_generate' costs ~538 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "gr1_z_image_turbo_generate"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~2627 tokens to connect (5 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

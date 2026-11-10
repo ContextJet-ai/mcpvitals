@@ -12,7 +12,7 @@
 </div>
 
 > [!NOTE]
-> An audit of ~1,850 public MCP servers found **52% abandoned and only 17% production-ready**, and a separate benchmark traced **56.7% of agent failures to tool misuse** (wrong tool, bad arguments). Registries have no health signal, so a broken server looks identical to a good one. `mcpvitals` is the checkup.
+> We ran mcpvitals on 31 popular MCP servers in November 2026 ([full results](docs/scan-2026-11/)). **21 of 31 still only speak the pre-2026-07-28 handshake**, 17 ship at least one tool that costs 500+ tokens to expose, and the heaviest costs ~19.8k tokens of context before you type anything. Registries show none of this, so a heavy or confusing server looks identical to a good one. `mcpvitals` is the checkup.
 
 ## 60-second start
 
@@ -38,7 +38,7 @@ mcp health: 40 (F)
 
 ## What it checks
 
-Most linters stop at basic conformance. `mcpvitals` runs those, plus four things no other tool does:
+Most linters stop at basic conformance. `mcpvitals` runs those, and goes further on token cost, tool confusion and spec migration:
 
 | Area | What it catches |
 |---|---|
@@ -51,6 +51,14 @@ Most linters stop at basic conformance. `mcpvitals` runs those, plus four things
 
 Every check is a pure function scored deterministically. Run `mcpvitals check --json` for machine output.
 
+The first run of an `npx`/`uvx` server includes its download, which can take a minute or two (Puppeteer pulls a whole Chromium). The default `--timeout` is 180 s. mcpvitals tries the 2026-07-28 `server/discover` handshake first and falls back to `initialize`; for a server that stalls on the probe, `--handshake initialize` skips it.
+
+## State of MCP servers (Nov 2026)
+
+![What breaks most often](docs/scan-2026-11/problems.png)
+
+31 popular servers, each run in a throwaway Docker container with placeholder credentials. Per-server scores, token costs and raw JSON are in [docs/scan-2026-11](docs/scan-2026-11/), along with the scripts to rerun it.
+
 ## Add the health badge to your README
 
 `mcpvitals` emits a shareable badge so a good score is visible at a glance:
@@ -58,8 +66,6 @@ Every check is a pure function scored deterministically. Run `mcpvitals check --
 ```bash
 mcpvitals check "npx your-server" --badge badge.svg
 ```
-
-Or use the shields.io endpoint output to keep it live.
 
 ## Use it in CI
 

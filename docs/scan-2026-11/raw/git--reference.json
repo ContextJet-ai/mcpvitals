@@ -1,0 +1,20 @@
+{
+ "name": "git (reference)",
+ "cmd": "uvx mcp-server-git",
+ "ok": true,
+ "secs": 0.8,
+ "report": {
+  "score": 100,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1459 tokens to connect (14 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

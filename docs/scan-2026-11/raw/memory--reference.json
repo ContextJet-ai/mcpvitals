@@ -1,0 +1,97 @@
+{
+ "name": "memory (reference)",
+ "cmd": "npx -y @modelcontextprotocol/server-memory",
+ "ok": true,
+ "secs": 1.0,
+ "report": {
+  "score": 100,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_entities"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "create_relations"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "add_observations"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "delete_entities"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "delete_observations"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "delete_relations"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "read_graph"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "search_nodes"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "open_nodes"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1066 tokens to connect (9 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

@@ -1,0 +1,27 @@
+{
+ "name": "Serena",
+ "cmd": "uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant",
+ "ok": true,
+ "secs": 1.3,
+ "report": {
+  "score": 95,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'serena_repl' costs ~705 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "serena_repl"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~887 tokens to connect (3 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

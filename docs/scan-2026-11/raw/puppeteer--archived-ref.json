@@ -1,0 +1,41 @@
+{
+ "name": "Puppeteer (archived ref)",
+ "cmd": "npx -y @modelcontextprotocol/server-puppeteer",
+ "ok": true,
+ "secs": 0.9,
+ "report": {
+  "score": 95,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2024-11-05 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~567 tokens to connect (7 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'puppeteer_click' and 'puppeteer_hover' are 0.86 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "puppeteer_click"
+   }
+  ]
+ },
+ "err": null
+}

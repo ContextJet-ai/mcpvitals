@@ -1,0 +1,42 @@
+everything (reference)	npx -y @modelcontextprotocol/server-everything
+filesystem (reference)	npx -y @modelcontextprotocol/server-filesystem /tmp
+memory (reference)	npx -y @modelcontextprotocol/server-memory
+sequential-thinking (reference)	npx -y @modelcontextprotocol/server-sequential-thinking
+fetch (reference)	uvx mcp-server-fetch
+git (reference)	uvx mcp-server-git
+time (reference)	uvx mcp-server-time
+Playwright (Microsoft)	npx -y @playwright/mcp@latest --headless
+Chrome DevTools (Google)	npx -y chrome-devtools-mcp@latest
+Context7 (Upstash)	npx -y @upstash/context7-mcp
+Desktop Commander	npx -y @wonderwhy-er/desktop-commander
+Browser MCP	npx -y @browsermcp/mcp@latest
+Notion (official)	npx -y @notionhq/notion-mcp-server
+Firecrawl	npx -y firecrawl-mcp
+Supabase	npx -y @supabase/mcp-server-supabase@latest
+Heroku	npx -y @heroku/mcp-server
+Exa	npx -y exa-mcp-server
+Tavily	npx -y tavily-mcp
+Brave Search	npx -y @brave/brave-search-mcp-server
+Stripe	npx -y @stripe/mcp --tools=all
+Sentry	npx -y @sentry/mcp-server
+Cloudflare	npx -y @cloudflare/mcp-server-cloudflare
+Netlify	npx -y @netlify/mcp
+Vercel (next-devtools)	npx -y next-devtools-mcp@latest
+Figma (Framelink)	npx -y figma-developer-mcp --stdio
+Puppeteer (archived ref)	npx -y @modelcontextprotocol/server-puppeteer
+GitHub (archived ref)	npx -y @modelcontextprotocol/server-github
+Slack (archived ref)	npx -y @modelcontextprotocol/server-slack
+Postgres (archived ref)	npx -y @modelcontextprotocol/server-postgres postgresql://localhost/none
+SQLite	uvx mcp-server-sqlite --db-path /tmp/mcpv-scan.db
+DuckDuckGo	uvx duckduckgo-mcp-server
+MarkItDown (Microsoft)	uvx markitdown-mcp
+AWS Documentation	uvx awslabs.aws-documentation-mcp-server@latest
+AWS Knowledge base	uvx awslabs.core-mcp-server@latest
+Serena	uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant
+Docker Hub	npx -y @docker/hub-mcp
+Hugging Face	npx -y @llmindset/hf-mcp-server
+Kubernetes	npx -y mcp-server-kubernetes
+MongoDB	npx -y mongodb-mcp-server
+Atlassian (community)	uvx mcp-atlassian
+Excel	npx -y @negokaz/excel-mcp-server
+ElevenLabs	uvx elevenlabs-mcp

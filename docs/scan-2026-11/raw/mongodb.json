@@ -1,0 +1,69 @@
+{
+ "name": "MongoDB",
+ "cmd": "npx -y mongodb-mcp-server",
+ "ok": true,
+ "secs": 1.9,
+ "report": {
+  "score": 65,
+  "grade": "D",
+  "findings": [
+   {
+    "code": "MV051",
+    "level": "warn",
+    "message": "capability 'logging' is deprecated in 2026-07-28",
+    "hint": "move off 'logging' before upgrading",
+    "tool": null
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'aggregate' costs ~2604 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "aggregate"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'create-index' costs ~2940 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "create-index"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'explain' costs ~3173 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "explain"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'export' costs ~3209 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "export"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~16133 tokens to connect (27 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'aggregate-db' and 'aggregate' are 0.82 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "aggregate-db"
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'collection-indexes' and 'collection-schema' are 0.83 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "collection-indexes"
+   }
+  ]
+ },
+ "err": null
+}

@@ -1,0 +1,41 @@
+{
+ "name": "Postgres (archived ref)",
+ "cmd": "npx -y @modelcontextprotocol/server-postgres postgresql://localhost/none",
+ "ok": true,
+ "secs": 0.7,
+ "report": {
+  "score": 95,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2024-11-05 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'query' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "query"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~24 tokens to connect (1 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

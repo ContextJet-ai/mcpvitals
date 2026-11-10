@@ -1,0 +1,8 @@
+{
+ "name": "Brave Search",
+ "cmd": "npx -y @brave/brave-search-mcp-server",
+ "ok": false,
+ "secs": 1.4,
+ "report": null,
+ "err": "r_error})\"\nRuntimeError: could not connect: MCPError: Connection closed (server/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\nError: A Brave API key is required via --brave-api-key, BRAVE_API_KEY, --brave-api-key-file, or BRAVE_API_KEY_FILE. You can get one at https://brave.com/search/api/.\nInvalid configuration\n\n"
+}

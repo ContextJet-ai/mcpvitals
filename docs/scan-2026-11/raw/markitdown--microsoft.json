@@ -1,0 +1,20 @@
+{
+ "name": "MarkItDown (Microsoft)",
+ "cmd": "uvx markitdown-mcp",
+ "ok": true,
+ "secs": 1.2,
+ "report": {
+  "score": 100,
+  "grade": "A",
+  "findings": [
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~60 tokens to connect (1 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

@@ -1,0 +1,8 @@
+{
+ "name": "SQLite",
+ "cmd": "uvx mcp-server-sqlite --db-path /tmp/mcpv-scan.db",
+ "ok": false,
+ "secs": 1.0,
+ "report": null,
+ "err": "^^^\n  File \"/usr/lib/python3.11/asyncio/base_events.py\", line 653, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/root/.cache/uv/archive-v0/nwmx_0e69U_wltnpbDNWp/lib/python3.11/site-packages/mcp_server_sqlite/server.py\", line 173, in main\n    @server.list_resources()\n     ^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Server' object has no attribute 'list_resources'\n\n"
+}

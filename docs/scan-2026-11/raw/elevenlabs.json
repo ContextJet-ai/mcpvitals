@@ -1,0 +1,8 @@
+{
+ "name": "ElevenLabs",
+ "cmd": "uvx elevenlabs-mcp",
+ "ok": false,
+ "secs": 1.1,
+ "report": null,
+ "err": "ache/uv/archive-v0/1ELVTT3bdpFfYXlPvPBQH/bin/elevenlabs-mcp\", line 6, in <module>\n    from elevenlabs_mcp.server import main\n  File \"/root/.cache/uv/archive-v0/1ELVTT3bdpFfYXlPvPBQH/lib/python3.11/site-packages/elevenlabs_mcp/server.py\", line 67, in <module>\n    raise ValueError(\"ELEVENLABS_API_KEY environment variable is required\")\nValueError: ELEVENLABS_API_KEY environment variable is required\n\n"
+}

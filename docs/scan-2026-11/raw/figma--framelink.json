@@ -1,0 +1,8 @@
+{
+ "name": "Figma (Framelink)",
+ "cmd": "npx -y figma-developer-mcp --stdio",
+ "ok": false,
+ "secs": 1.5,
+ "report": null,
+ "err": "in _run\n    raise RuntimeError(f\"could not connect: {_leaf(e2)} (server/discover also failed: {discover_error})\"\nRuntimeError: could not connect: MCPError: Connection closed (server/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\nEither FIGMA_API_KEY or FIGMA_OAUTH_TOKEN is required (via CLI argument or .env file)\n\n"
+}

@@ -1,0 +1,167 @@
+{
+ "name": "everything (reference)",
+ "cmd": "npx -y @modelcontextprotocol/server-everything",
+ "ok": true,
+ "secs": 1.8,
+ "report": {
+  "score": 70,
+  "grade": "C",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV051",
+    "level": "warn",
+    "message": "capability 'logging' is deprecated in 2026-07-28",
+    "hint": "move off 'logging' before upgrading",
+    "tool": null
+   },
+   {
+    "code": "MV052",
+    "level": "warn",
+    "message": "core 'tasks' capability moved to the io.modelcontextprotocol/tasks extension in 2026-07-28",
+    "hint": "advertise tasks via the extension; tasks/result is replaced by polling tasks/get",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "echo"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-annotated-message"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-env"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-resource-links"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-resource-reference"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-structured-content"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-sum"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "get-tiny-image"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "gzip-file-as-resource"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "toggle-simulated-logging"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "toggle-subscriber-updates"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "trigger-long-running-operation"
+   },
+   {
+    "code": "MV055",
+    "level": "info",
+    "message": "input schema uses draft-07 constructs: $schema http://json-schema.org/draft-07/schema#",
+    "hint": "tool schemas are JSON Schema 2020-12: use $defs and prefixItems",
+    "tool": "simulate-research-query"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'get-resource-links' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "get-resource-links"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'get-resource-reference' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "get-resource-reference"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'gzip-file-as-resource' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "gzip-file-as-resource"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'trigger-long-running-operation' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "trigger-long-running-operation"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~1147 tokens to connect (13 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

@@ -1,0 +1,8 @@
+{
+ "name": "AWS Knowledge base",
+ "cmd": "uvx awslabs.core-mcp-server@latest",
+ "ok": false,
+ "secs": 0.5,
+ "report": null,
+ "err": "ver/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\n  \u00d7 No solution found when resolving tool dependencies:\n  \u2570\u2500\u25b6 Because all versions of awslabs-core-mcp-server were yanked (reason:\n      load individual MCPs) and you require awslabs-core-mcp-server, we can\n      conclude that your requirements are unsatisfiable.\n\n"
+}

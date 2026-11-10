@@ -1,0 +1,76 @@
+{
+ "name": "Kubernetes",
+ "cmd": "npx -y mcp-server-kubernetes",
+ "ok": true,
+ "secs": 1.4,
+ "report": {
+  "score": 70,
+  "grade": "C",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'kubectl_apply' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "kubectl_apply"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'kubectl_delete' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "kubectl_delete"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'kubectl_create' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "kubectl_create"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'list_api_resources' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "list_api_resources"
+   },
+   {
+    "code": "MV030",
+    "level": "warn",
+    "message": "tool 'kubectl_create' costs ~1006 tokens to expose",
+    "hint": "trim the description/schema; it inflates every request",
+    "tool": "kubectl_create"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~5797 tokens to connect (23 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   },
+   {
+    "code": "MV040",
+    "level": "warn",
+    "message": "tools 'kubectl_get' and 'kubectl_describe' are 0.84 similar; agents may pick the wrong one",
+    "hint": "differentiate names/descriptions or merge them",
+    "tool": "kubectl_get"
+   }
+  ]
+ },
+ "err": null
+}

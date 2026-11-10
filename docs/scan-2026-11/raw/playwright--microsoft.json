@@ -1,0 +1,76 @@
+{
+ "name": "Playwright (Microsoft)",
+ "cmd": "npx -y @playwright/mcp@latest --headless",
+ "ok": true,
+ "secs": 0.9,
+ "report": {
+  "score": 70,
+  "grade": "C",
+  "findings": [
+   {
+    "code": "MV050",
+    "level": "info",
+    "message": "protocol 2025-11-25 predates the 2026-07-28 stateless spec",
+    "hint": "the new spec removes sessions/initialize; plan the migration",
+    "tool": null
+   },
+   {
+    "code": "MV056",
+    "level": "info",
+    "message": "server does not answer server/discover; only the legacy initialize handshake works",
+    "hint": "2026-07-28 clients start with server/discover and may not fall back",
+    "tool": null
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'browser_emulate_media' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "browser_emulate_media"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'browser_file_upload' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "browser_file_upload"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'browser_find' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "browser_find"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'browser_run_code_unsafe' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "browser_run_code_unsafe"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'browser_snapshot' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "browser_snapshot"
+   },
+   {
+    "code": "MV010",
+    "level": "warn",
+    "message": "tool 'browser_wait_for' declares parameters but no 'required' list",
+    "hint": "agents may omit needed args; mark required params",
+    "tool": "browser_wait_for"
+   },
+   {
+    "code": "MV031",
+    "level": "info",
+    "message": "server costs ~4534 tokens to connect (25 tools)",
+    "hint": "this is spent on every request before the user's message",
+    "tool": null
+   }
+  ]
+ },
+ "err": null
+}

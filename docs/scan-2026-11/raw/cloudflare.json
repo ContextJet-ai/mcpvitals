@@ -1,0 +1,8 @@
+{
+ "name": "Cloudflare",
+ "cmd": "npx -y @cloudflare/mcp-server-cloudflare",
+ "ok": false,
+ "secs": 2.0,
+ "report": null,
+ "err": "or(f\"could not connect: {_leaf(e2)} (server/discover also failed: {discover_error})\"\nRuntimeError: could not connect: MCPError: Connection closed (server/discover also failed: DiscoverFailed: MCPError: Connection closed; initialize on the same connection: MCPError: Connection closed)\n[DEBUG 2026-11-10T21:05:37.234Z] Uncaught exception: Error: Unknown command: undefined. Expected 'init' or 'run'.\n\n"
+}
