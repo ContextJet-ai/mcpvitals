@@ -1,0 +1,23 @@
+name: Check my server
+description: Ask for an MCP server to be added to the next scan, or rerun after you fixed something
+labels: ["scan-request"]
+body:
+  - type: input
+    id: command
+    attributes:
+      label: How to start it
+      description: The stdio command or http url, e.g. npx -y @you/server
+    validations:
+      required: true
+  - type: dropdown
+    id: creds
+    attributes:
+      label: Does it need an account or API key to start?
+      options: ["No", "Yes (it will be listed, not ranked)"]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: A finding you think is wrong, or what you changed since the last scan
