@@ -1,4 +1,4 @@
-name: "mcpvitals"
+name: "mcpvitals MCP health check"
 description: "Health-check an MCP server in CI: score, token cost, tool confusion, 2026-07-28 spec readiness"
 branding:
   icon: "activity"
