@@ -27,3 +27,17 @@ def test_badge_written(tmp_path):
     out = tmp_path / "b.svg"
     main(["check", "--snapshot", str(FIX / "healthy.json"), "--badge", str(out)])
     assert out.read_text().startswith("<svg")
+
+
+def test_fail_under_gates_score(capsys):
+    assert main(["check", "--snapshot", str(FIX / "messy.json"), "--fail-under", "100"]) == 1
+    assert main(["check", "--snapshot", str(FIX / "healthy.json"), "--fail-under", "0"]) == 0
+
+
+def test_sarif_written(tmp_path, capsys):
+    out = tmp_path / "r.sarif"
+    main(["check", "--snapshot", str(FIX / "messy.json"), "--sarif", str(out)])
+    sarif = json.loads(out.read_text())
+    results = sarif["runs"][0]["results"]
+    assert sarif["version"] == "2.1.0" and results
+    assert {r["level"] for r in results} <= {"error", "warning", "note"}

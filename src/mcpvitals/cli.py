@@ -8,7 +8,7 @@ from mcpvitals.models import ServerSnapshot, Level
 from mcpvitals.checks import run_all
 from mcpvitals.checks.migration import migration_readiness
 from mcpvitals.scoring import score
-from mcpvitals.report import render_human, render_json
+from mcpvitals.report import render_human, render_json, render_sarif
 from mcpvitals.badge import badge_svg
 from mcpvitals.lock import lock_from_snapshot, diff_locks
 
@@ -26,8 +26,13 @@ def _cmd_check(args) -> int:
     report = score(findings)
     if args.badge:
         pathlib.Path(args.badge).write_text(badge_svg(report))
+    if args.sarif:
+        pathlib.Path(args.sarif).write_text(render_sarif(report, args.target or args.snapshot))
     print(render_json(report) if args.json else render_human(report))
     if args.strict and any(f.level == Level.ERROR for f in findings):
+        return 1
+    if args.fail_under is not None and report.score < args.fail_under:
+        print(f"score {report.score} is below --fail-under {args.fail_under}", file=sys.stderr)
         return 1
     return 0
 
@@ -83,6 +88,8 @@ def main(argv=None) -> int:
             sp.add_argument("--json", action="store_true")
             sp.add_argument("--badge", metavar="FILE")
             sp.add_argument("--strict", action="store_true")
+            sp.add_argument("--sarif", metavar="FILE", help="write findings as SARIF 2.1.0")
+            sp.add_argument("--fail-under", type=int, metavar="N", help="exit 1 if the score is below N")
         if name == "watch":
             sp.add_argument("--lock", default="mcp.lock", help="lock file path (default: mcp.lock)")
             sp.add_argument("--check", action="store_true", help="do not update the lock; fail on a changed tool")

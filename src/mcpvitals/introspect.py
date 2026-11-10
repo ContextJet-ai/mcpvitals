@@ -17,7 +17,11 @@ def _get(obj, snake: str, camel: str):
 
 async def _collect(session: ClientSession) -> ServerSnapshot:
     init = await session.initialize()
-    tools = (await session.list_tools()).tools
+    listed = await session.list_tools()
+    tools = listed.tools
+    # list twice: 2026-07-28 says servers SHOULD return tools in a deterministic order
+    order2 = [t.name for t in (await session.list_tools()).tools]
+    extra = {**(getattr(listed, "model_extra", None) or {}), **listed.model_dump(exclude_none=True, by_alias=True)}
     tool_specs = [ToolSpec(t.name, t.description or "", _get(t, "input_schema", "inputSchema") or {}) for t in tools]
     info = _get(init, "server_info", "serverInfo")
     caps = init.capabilities.model_dump(exclude_none=True) if init.capabilities else {}
@@ -26,7 +30,8 @@ async def _collect(session: ClientSession) -> ServerSnapshot:
         version=getattr(info, "version", ""),
         protocol_version=str(_get(init, "protocol_version", "protocolVersion") or ""),
         tools=tool_specs,
-        raw={"capabilities": caps},
+        raw={"capabilities": caps, "tools_order_2": order2,
+             "list_cache": {k: extra[k] for k in ("ttlMs", "cacheScope") if k in extra}},
     )
 
 

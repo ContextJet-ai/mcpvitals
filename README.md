@@ -47,7 +47,7 @@ Most linters stop at basic conformance. `mcpvitals` runs those, plus four things
 | **Security hygiene** | secrets in tool metadata, over-broad tools (`run_sql`, `exec`), model-directed instructions in descriptions (the tool-poisoning surface) |
 | **Token cost** | how many tokens each tool burns in the context window, and the total cost to connect the server |
 | **Tool confusion** | pairs of tools an agent will mix up, predicted from name/description overlap *before* it happens in production |
-| **Migration readiness** | what breaks under the 2026-07-28 stateless spec |
+| **Migration readiness** | what breaks under the 2026-07-28 stateless spec: old protocol, deprecated caps, core `tasks` (now an extension), unstable `tools/list` order, missing `ttlMs`/`cacheScope`, draft-07 schema constructs |
 
 Every check is a pure function scored deterministically. Run `mcpvitals check --json` for machine output.
 
@@ -69,8 +69,15 @@ Gate your server on every push with the bundled GitHub Action:
 - uses: ContextJet-ai/mcpvitals@v0
   with:
     target: "python -m your_server"
-    strict: "true"   # fail the build on any error-level finding
+    strict: "true"      # fail the build on any error-level finding
+    fail-under: "80"    # or fail when the score drops below a number
+    sarif: mcpvitals.sarif
+- uses: github/codeql-action/upload-sarif@v3
+  with:
+    sarif_file: mcpvitals.sarif   # findings show up in the Security tab and on PRs
 ```
+
+Locally: `mcpvitals check "npx your-server" --fail-under 80 --sarif out.sarif`.
 
 ## Track and monitor (not just a one-shot check)
 
